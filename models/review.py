@@ -1,5 +1,5 @@
 from models.basemodel import BaseModel
-from sqlalchemy import Column, String, Integer, ForeignKey, Text
+from sqlalchemy import Column, String, Integer, ForeignKey, Text, Relationship
 
 class Review(Base):
     __tablename__ = 'reviews'
@@ -9,6 +9,7 @@ class Review(Base):
 	place_id = Column(Integer, ForeignKey('places.id', nullable=False))
 	rating = Column(Integer, nullable=False)
 	text = Column(Integer, nullable=False)
+    user = relationship('User', back_populates='reviews')
 
 	def __init__(self, user_id, place_id, rating, text):
         super().__init__()

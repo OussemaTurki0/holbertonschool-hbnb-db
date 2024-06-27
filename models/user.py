@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 from models.basemodel import Basemodel
-from sqlalchemy import Column, String, Integer, Boolean
+from sqlalchemy import Column, String, Integer, Boolean, Relationship
 import bcrpyt
 
 
@@ -14,6 +14,7 @@ class User(Base):
     review = Column(String, )
     hashed_password = Column(String, nullable=False)
 	is_admin = Column(Boolean, default=False)
+	reviews = relationship(Review)
 
 	def set_password(self, password):
         """Hash the password and store it."""
