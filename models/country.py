@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 from models.basemodel import Basemodel
-from sqlalchemy import Column, String, Integer, ForeignKey, Boolean
+from sqlalchemy import Column, String, Integer, ForeignKey
 
 class Country(Base):
 	__tablename__ = 'countries'
