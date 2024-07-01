@@ -16,9 +16,9 @@ class Place(BaseModel):
     number_of_bathrooms = Column(Integer, nullable=False)
     price_per_night = Column(Float, nullable=False)
     max_guests = Column(Integer, nullable=False)
-    host = relationship("User", back_populates="places")  # Many-to-One: Each place has one host
-    amenities = relationship("Amenity", back_populates="place")  # One-to-Many: One place can have multiple amenities
-    reviews = relationship("Review", back_populates="place")  # One-to-Many: One place can have multiple reviews
+    host = relationship("User", back_populates="places")
+    amenities = relationship("Amenity", back_populates="place")
+    reviews = relationship("Review", back_populates="place")
 
     def __init__(self, name, description, address, city_id, host_id, number_of_rooms, number_of_bathrooms, price_per_night, max_guests):
         super().__init__()

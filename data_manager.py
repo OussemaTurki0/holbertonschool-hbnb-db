@@ -59,4 +59,4 @@ def delete_user(email):
         print("User not found")
 
 if __name__ == "__main__":
-    create_tables()  # Create tables when running data_manager.py
+    create_tables()
