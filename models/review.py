@@ -1,4 +1,4 @@
-from models.basemodel import BaseModel
+from models.base_model import BaseModel
 from sqlalchemy import Column, String, Integer, ForeignKey, Text, Relationship
 
 class Review(Base):

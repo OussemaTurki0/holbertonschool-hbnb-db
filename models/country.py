@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-from models.basemodel import Basemodel
+from models.base_model import Basemodel
 from sqlalchemy import Column, String, Integer, ForeignKey
 
 class Country(Base):

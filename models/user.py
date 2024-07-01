@@ -1,10 +1,10 @@
 #!/usr/bin/python3
 from models.base_model import Basemodel
 from sqlalchemy import Column, String, Integer, Boolean, Relationship
-import bcrpyt
+import bcrypt
 
 
-class User(Base):
+class User(Basemodel):
     __tablename__ = 'users'
     
     id = Column(Integer, primary_key=True, autoincrement=True)
