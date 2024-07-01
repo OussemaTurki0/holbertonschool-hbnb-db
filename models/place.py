@@ -6,7 +6,7 @@ from sqlalchemy.orm import relationship
 class Place(BaseModel):
     __tablename__ = 'places'
     
-    place_id = Column(Integer, primary_key=True, autoincrement=True)
+    place_id = Column(Integer, primary_key=True)
     name = Column(String, nullable=False)
     description = Column(String)
     address = Column(String)
