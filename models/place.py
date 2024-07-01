@@ -1,9 +1,10 @@
 #!/usr/bin/python3
 from models.base_model import Basemodel
 from sqlalchemy import Column, String, Integer, Float, ForeignKey
+from sqlalchemy.orm import relationship
 
 
-class Place(Base):
+class Place(BaseModel):
     __tablename__ = 'places'
     
 	place_id = Column(Integer, primary_key=True, autoincrement=True)

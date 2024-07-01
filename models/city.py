@@ -1,8 +1,9 @@
 #!/usr/bin/python3
 from models.base_model import Basemodel
 from sqlalchemy import Column, String, Integer, ForeignKey
+from sqlalchemy.orm import relationship
 
-class City(Base):
+class City(BaseModel):
     __tablename__ = 'cities'
 
     id = Column(Integer, primary_key=True, autoincrement=True)

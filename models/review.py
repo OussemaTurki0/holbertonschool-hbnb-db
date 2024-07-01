@@ -1,7 +1,7 @@
 from models.base_model import BaseModel
-from sqlalchemy import Column, String, Integer, ForeignKey, Text, Relationship
-
-class Review(Base):
+from sqlalchemy import Column, String, Integer, ForeignKey, Text
+from sqlalchemy.orm import relationship
+class Review(BaseModel):
     __tablename__ = 'reviews'
 
 	id = Column(Integer, primary_key=True, autoincrement=True)
