@@ -15,7 +15,8 @@ class User(BaseModel):
     review = Column(String)
     hashed_password = Column(String, nullable=False)
     is_admin = Column(Boolean, default=False)
-    reviews = relationship("Review")
+    places = relationship("Place", back_populates="host")  # One-to-Many: One user can host multiple places
+    reviews = relationship("Review", back_populates="user")  # One-to-Many: One user can write multiple reviews
 
     def set_password(self, password):
         """Hash the password and store it."""

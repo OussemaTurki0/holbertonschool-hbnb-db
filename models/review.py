@@ -11,7 +11,8 @@ class Review(BaseModel):
     place_id = Column(Integer, ForeignKey('places.id'), nullable=False)
     rating = Column(Integer, nullable=False)
     text = Column(Text, nullable=False)
-    user = relationship('User', back_populates='reviews')
+    user = relationship('User', back_populates='reviews')  # Many-to-One: Each review belongs to one user
+    place = relationship('Place', back_populates='reviews')  # Many-to-One: Each review is for one place
 
     def __init__(self, user_id, place_id, rating, text):
         super().__init__()

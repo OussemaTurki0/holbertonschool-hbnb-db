@@ -9,6 +9,7 @@ class Amenity(BaseModel):
     id = Column(Integer, primary_key=True, autoincrement=True)
     name = Column(String)
     place_id = Column(Integer, ForeignKey('places.id'), nullable=False)
+    place = relationship('Place', back_populates='amenities')  # Many-to-One: Each amenity belongs to one place
 
     def __init__(self, name, place_id):
         super().__init__()
