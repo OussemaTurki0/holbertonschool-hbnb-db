@@ -1,5 +1,5 @@
 from flask import Flask, jsonify, request
-from models.base_model import Base, engine
+from models.base_model import BaseModel
 from data_manager import get_session
 from models.user import User
 from models.review import Review
