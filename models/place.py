@@ -1,13 +1,12 @@
 #!/usr/bin/python3
-from models.base_model import Basemodel
+from models.base_model import BaseModel
 from sqlalchemy import Column, String, Integer, Float, ForeignKey
 from sqlalchemy.orm import relationship
-
 
 class Place(BaseModel):
     __tablename__ = 'places'
     
-	place_id = Column(Integer, primary_key=True, autoincrement=True)
+    place_id = Column(Integer, primary_key=True, autoincrement=True)
     name = Column(String, nullable=False)
     description = Column(String)
     address = Column(String)
@@ -19,7 +18,7 @@ class Place(BaseModel):
     max_guests = Column(Integer, nullable=False)
 
     def __init__(self, name, description, address, city_id, host_id, number_of_rooms, number_of_bathrooms, price_per_night, max_guests):
-		super().__init__()
+        super().__init__()
         self.name = name
         self.description = description
         self.address = address
