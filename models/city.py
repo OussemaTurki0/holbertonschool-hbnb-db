@@ -9,7 +9,7 @@ class City(BaseModel):
     id = Column(Integer, primary_key=True, autoincrement=True)
     name = Column(String, nullable=False)
     country_id = Column(Integer, ForeignKey('countries.id'), nullable=False)
-    country = relationship('Country', back_populates='cities')
+    country = relationship('Country', back_populates='cities')  # Many-to-One: Each city belongs to one country
 
     def __init__(self, name, country_id):
         super().__init__()
