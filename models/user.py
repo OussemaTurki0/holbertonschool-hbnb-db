@@ -1,10 +1,8 @@
-#!/usr/bin/python3
-from models.base_model import BaseModel
 from sqlalchemy import Column, String, Integer, Boolean
 from sqlalchemy.orm import relationship
 import bcrypt
-
-
+from .base_model import BaseModel  # Adjust this as per your actual import structure
+import sqlite3
 class User(BaseModel):
     __tablename__ = 'users'
     
@@ -15,6 +13,8 @@ class User(BaseModel):
     review = Column(String)
     hashed_password = Column(String, nullable=False)
     is_admin = Column(Boolean, default=False)
+    
+    # Relationships
     places = relationship("Place", back_populates="host")
     reviews = relationship("Review", back_populates="user")
 
