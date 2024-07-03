@@ -6,7 +6,7 @@ from models.place import Place
 from models.country import Country
 from models.city import City
 from models.amenity import Amenity
-
+from . import create_app
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///data.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
