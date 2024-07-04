@@ -9,7 +9,7 @@ from models.city import City
 from models.amenity import Amenity
 
 # Configure database connection
-DATABASE_URL = "sqlite:///hbnb.db"  # Adjust this according to your database setup
+DATABASE_URL = "sqlite:///***********.*********"
 engine = create_engine(DATABASE_URL, echo=True)
 Session = sessionmaker(bind=engine)
 session = Session()

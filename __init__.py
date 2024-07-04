@@ -8,7 +8,6 @@ from flask_jwt_extended import JWTManager
 from dotenv import load_dotenv
 import os
 
-# Chargement des variables d'environnement depuis le fichier .env
 load_dotenv()
 
 SQL = SQLAlchemy()

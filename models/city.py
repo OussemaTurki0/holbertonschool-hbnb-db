@@ -36,7 +36,7 @@ class City(BaseModel):
     @staticmethod
     def create(data):
         """Create a new city"""
-        from .country import Country  # Adjust this based on your actual import structure
+        from .country import Country
         country = Country.query.get(data["country_id"])
         if not country:
             raise ValueError("Country not found")
