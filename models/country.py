@@ -1,6 +1,6 @@
 from sqlalchemy import Column, String, Integer, ForeignKey
 from sqlalchemy.orm import relationship
-from .base_model import BaseModel  # Adjust this as per your actual import structure
+from .base_model import Base  # Adjust this as per your actual import structure
 
 class Country(BaseModel):
     __tablename__ = 'countries'
@@ -45,7 +45,7 @@ class Country(BaseModel):
         """Create a new country"""
         new_country = Country(name=name, code=code)
 
-        db.session.add(new_country)
+        session.add(new_country)
         db.session.commit()
 
         return new_country
