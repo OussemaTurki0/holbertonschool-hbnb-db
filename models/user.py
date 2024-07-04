@@ -19,12 +19,12 @@ class User(BaseModel):
     is_admin = Column(Boolean, default=False)
     created_at = Column(SQL.DateTime, default=SQL.func.current_timestamp())
     updated_at = Column(SQL.DateTime, onupdate=SQL.func.current_timestamp())
+    places = relationship("Place", back_populates="host")
+    reviews = relationship("Review", back_populates="user")
     #Primary=key(ensures that each id value is unique and cannot be duplicated within the table.)
     #autoincrement=True(ensuring that each row gets a unique identifier without needing manual assignment.)
     # Relationships
-    places = relationship("Place", back_populates="host")
-    reviews = relationship("Review", back_populates="user")
-
+    
     def __init__(self, email, first_name, last_name, password, is_admin=False):
         super().__init__()
         self.email = email
