@@ -3,7 +3,7 @@ This script defines the routes for the amenities functionality.
 """
 
 from flask import Blueprint
-from controolers.amenity_controllers import (
+from requests.amenity_controllers import (
     create_amenity,
     delete_amenity,
     get_amenity_by_id,

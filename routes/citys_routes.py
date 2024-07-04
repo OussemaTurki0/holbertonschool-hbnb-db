@@ -3,7 +3,7 @@ This script defines the routes for the cities functionality.
 """
 
 from flask import Blueprint
-from controolers.city_controllers import (
+from requests.city_controllers import (
     create_city,
     delete_city,
     get_city_by_id,

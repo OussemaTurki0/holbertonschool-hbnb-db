@@ -3,7 +3,7 @@
 from flask import Flask
 from flask_jwt_extended import JWTManager
 from models import db, bcrypt
-from controolers import user
+from requests import user
 
 app = Flask(__name__)
 

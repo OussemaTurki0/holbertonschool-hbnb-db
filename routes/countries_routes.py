@@ -3,7 +3,7 @@ This script defines the routes for the countries endpoints.
 """
 
 from flask import Blueprint
-from controolers.country_controllers import (
+from requests.country_controllers import (
     get_countries,
     get_country_by_code,
     get_country_cities,

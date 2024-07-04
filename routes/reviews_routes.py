@@ -3,7 +3,7 @@ This script sets up the routes for the reviews functionality.
 """
 
 from flask import Blueprint
-from controolers.review_controllers import (
+from requests.review_controllers import (
     create_review,
     delete_review,
     get_reviews_from_place,

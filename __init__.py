@@ -44,12 +44,12 @@ def register_routes(app: Flask) -> None:
     """Import and register the routes for the Flask app"""
 
     # Import the routes here to avoid circular imports
-    from controolers.users_controllers import users_bp
-    from controolers.country_controllers import countries_bp
-    from controolers.city_controllers import cities_bp
-    from controolers.place_controllers import places_bp
-    from controolers.amenity_controllers import amenities_bp
-    from controolers.review_controllers import reviews_bp
+    from requests.users_controllers import users_bp
+    from requests.country_controllers import countries_bp
+    from requests.city_controllers import cities_bp
+    from requests.place_controllers import places_bp
+    from requests.amenity_controllers import amenities_bp
+    from requests.review_controllers import reviews_bp
 
     # Register the blueprints in the app
     app.register_blueprint(user_routes)

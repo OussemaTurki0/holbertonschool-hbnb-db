@@ -3,7 +3,7 @@ This script sets up the routes for the places functionality.
 """
 
 from flask import Blueprint
-from controolers.place_controllers import (
+from requests.place_controllers import (
     create_place,
     delete_place,
     get_place_by_id,

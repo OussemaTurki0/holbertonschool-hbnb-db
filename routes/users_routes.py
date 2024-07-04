@@ -3,7 +3,7 @@ This script defines the routes for user-related API endpoints.
 """
 
 from flask import Blueprint
-from controolers.users_controllers import (
+from requests.users_controllers import (
     create_user,
     delete_user,
     get_user_by_id,
