@@ -6,7 +6,7 @@ from sqlalchemy.orm import relationship
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
 
-db = SQLAlchemy()
+SQL = SQLAlchemy()
 
 class Amenity(db.Model):
     """Amenity representation"""

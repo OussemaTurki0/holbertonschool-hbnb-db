@@ -1,6 +1,9 @@
 from sqlalchemy import Column, String, Integer, ForeignKey
 from sqlalchemy.orm import relationship
 from .base_model import Base  # Adjust this as per your actual import structure
+from flask_sqlalchemy import SQLAlchemy
+
+SQL = SQLAlchemy()
 
 class Country(BaseModel):
     __tablename__ = 'countries'

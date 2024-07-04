@@ -4,7 +4,7 @@ import uuid
 from abc import ABC, abstractmethod
 
 
-class Base(ABC):
+class BaseModel(ABC):
     """
     Base Interface for all models
     """

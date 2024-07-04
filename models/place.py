@@ -2,6 +2,9 @@ from sqlalchemy import Column, String, Integer, Float, ForeignKey, Text
 from sqlalchemy.orm import relationship
 from .base_model import BaseModel  # Adjust this as per your actual import structure
 from . import SQL
+from flask_sqlalchemy import SQLAlchemy
+
+SQL = SQLAlchemy()
 
 class Place(BaseModel):
     __tablename__ = 'places'
@@ -90,8 +93,8 @@ class Place(BaseModel):
             max_guests=int(data["max_guests"])
         )
 
-        db.session.add(new_place)
-        db.session.commit()
+        SQL.session.add(new_place)
+        SQL.session.commit()
 
         return new_place
 
@@ -106,6 +109,6 @@ class Place(BaseModel):
         for key, value in data.items():
             setattr(place, key, value)
 
-        db.session.commit()
+        SQL.session.commit()
 
         return place
