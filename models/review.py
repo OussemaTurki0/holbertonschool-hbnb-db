@@ -14,7 +14,6 @@ class Review(SQL.Model):
     rating = SQL.Column(SQL.Float, nullable=False)
     created_at = SQL.Column(SQL.DateTime, default=SQL.func.current_timestamp())
     updated_at = SQL.Column(SQL.DateTime, onupdate=SQL.func.current_timestamp())
-
     place = SQL.relationship('Place', back_populates='reviews')
     user = SQL.relationship('User', back_populates='reviews')
 
@@ -45,38 +44,29 @@ class Review(SQL.Model):
         """Create a new review"""
         from models.user import User
         from models.place import Place
-
         user = User.query.get(data["user_id"])
         if not user:
             raise ValueError(f"User with ID {data['user_id']} not found")
-
         place = Place.query.get(data["place_id"])
         if not place:
             raise ValueError(f"Place with ID {data['place_id']} not found")
-
         new_review = Review(
             place_id=data["place_id"],
             user_id=data["user_id"],
             comment=data["comment"],
             rating=float(data["rating"])
         )
-
         SQL.session.add(new_review)
         SQL.session.commit()
-
         return new_review
 
     @staticmethod
     def update(review_id: str, data: dict) -> "Review | None":
         """Update an existing review"""
         review = Review.query.get(review_id)
-
         if not review:
             raise ValueError("Review not found")
-
         for key, value in data.items():
             setattr(review, key, value)
-
         SQL.session.commit()
-
         return review

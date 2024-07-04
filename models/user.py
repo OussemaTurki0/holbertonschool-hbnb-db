@@ -1,7 +1,7 @@
 from sqlalchemy import Column, String, Integer, Boolean
 from sqlalchemy.orm import relationship
 import bcrypt
-from models.base_model import Base
+from models.base_model import BaseModel
 from datetime import datetime
 from . import SQL, bcrypt
 from flask_sqlalchemy import SQLAlchemy
@@ -19,7 +19,8 @@ class User(BaseModel):
     is_admin = Column(Boolean, default=False)
     created_at = Column(SQL.DateTime, default=SQL.func.current_timestamp())
     updated_at = Column(SQL.DateTime, onupdate=SQL.func.current_timestamp())
-    
+    #Primary=key(ensures that each id value is unique and cannot be duplicated within the table.)
+    #autoincrement=True(ensuring that each row gets a unique identifier without needing manual assignment.)
     # Relationships
     places = relationship("Place", back_populates="host")
     reviews = relationship("Review", back_populates="user")
@@ -60,10 +61,8 @@ class User(BaseModel):
     def create(user_data):
         """Create a new user"""
         existing_user = User.query.filter_by(email=user_data["email"]).first()
-
         if existing_user:
             raise ValueError("User already exists")
-
         new_user = User(
             email=user_data["email"],
             first_name=user_data["first_name"],
@@ -71,20 +70,16 @@ class User(BaseModel):
             password=user_data["password"],
             is_admin=user_data.get("is_admin", False)
         )
-
         SQL.session.add(new_user)
         SQL.session.commit()
-
         return new_user
 
     @staticmethod
     def update(user_id, data):
         """Update an existing user"""
         user = User.query.get(user_id)
-
         if not user:
             return None
-
         if "email" in data:
             user.email = data["email"]
         if "first_name" in data:
@@ -95,7 +90,5 @@ class User(BaseModel):
             user.set_password(data["password"])
         if "is_admin" in data:
             user.is_admin = data["is_admin"]
-
         SQL.session.commit()
-
         return user

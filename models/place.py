@@ -1,6 +1,6 @@
 from sqlalchemy import Column, String, Integer, Float, ForeignKey, Text
 from sqlalchemy.orm import relationship
-from .base_model import BaseModel  # Adjust this as per your actual import structure
+from .base_model import BaseModel
 from . import SQL
 from flask_sqlalchemy import SQLAlchemy
 
@@ -102,13 +102,9 @@ class Place(BaseModel):
     def update(place_id: str, data: dict) -> "Place | None":
         """Update an existing place"""
         place = Place.query.get(place_id)
-
         if not place:
             return None
-
         for key, value in data.items():
             setattr(place, key, value)
-
         SQL.session.commit()
-
         return place

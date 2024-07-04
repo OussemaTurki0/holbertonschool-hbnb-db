@@ -3,12 +3,10 @@ from typing import Any, Optional
 import uuid
 from abc import ABC, abstractmethod
 
-
 class BaseModel(ABC):
     """
     Base Interface for all models
     """
-
     id: str
     created_at: datetime
     updated_at: datetime
@@ -40,24 +38,20 @@ class BaseModel(ABC):
         """
         This is a common method to get an specific object
         of a class by its id
-
         If a class needs a different implementation,
         it should override this method
         """
         from persistence import repo
-
         return repo.get(cls.__name__.lower(), id)
 
     @classmethod
     def get_all(cls) -> list["Any"]:
         """
         This is a common method to get all objects of a class
-
         If a class needs a different implementation,
         it should override this method
         """
         from persistence import repo
-
         return repo.get_all(cls.__name__.lower())
 
     @classmethod
@@ -65,17 +59,13 @@ class BaseModel(ABC):
         """
         This is a common method to delete an specific
         object of a class by its id
-
         If a class needs a different implementation,
         it should override this method
         """
         from persistence import repo
-
         obj = cls.get(id)
-
         if not obj:
             return False
-
         return repo.delete(obj)
 
     @abstractmethod

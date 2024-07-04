@@ -12,7 +12,6 @@ class City(BaseModel):
     id = Column(Integer, primary_key=True, autoincrement=True)
     name = Column(String(100), nullable=False)
     country_id = Column(Integer, ForeignKey('countries.id'), nullable=False)
-
     country = relationship('Country', back_populates='cities')
 
     def __init__(self, name, country_id):
@@ -38,16 +37,12 @@ class City(BaseModel):
     def create(data):
         """Create a new city"""
         from .country import Country  # Adjust this based on your actual import structure
-
         country = Country.query.get(data["country_id"])
-
         if not country:
             raise ValueError("Country not found")
-
         new_city = City(name=data["name"], country_id=data["country_id"])
-
-        db.session.add(new_city)
-        db.session.commit()
+        SQL.session.add(new_city)
+        SQL.session.commit()
 
         return new_city
 
@@ -55,15 +50,11 @@ class City(BaseModel):
     def update(city_id, data):
         """Update an existing city"""
         city = City.query.get(city_id)
-
         if not city:
             raise ValueError("City not found")
-
         if "name" in data:
             city.name = data["name"]
         if "country_id" in data:
             city.country_id = data["country_id"]
-
-        db.session.commit()
-
+        SQL.session.commit()
         return city
