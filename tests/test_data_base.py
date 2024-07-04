@@ -7,8 +7,17 @@ from models.place import Place
 from models.country import Country
 from models.city import City
 from models.amenity import Amenity
+import sys
+import os
 
-# Configure database connection
+# Add the root directory to the Python path
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
+from models.base_model import BaseModel
+
+# Your test code here
+
+# Configure test database connection
 DATABASE_URL = "sqlite:///test_database.db"
 engine = create_engine(DATABASE_URL, echo=True)
 Session = sessionmaker(bind=engine)
@@ -60,3 +69,24 @@ def delete_user(email):
 
 if __name__ == "__main__":
     create_tables()
+
+    # Add a user
+    add_user("John", "Doe", "john.doe@example.com", "password123")
+
+    # Get the added user
+    user = get_user("john.doe@example.com")
+    print(user.to_dict() if user else "User not found")
+
+    # Update the user
+    update_user("john.doe@example.com", first_name="Jonathan")
+
+    # Get the updated user
+    user = get_user("john.doe@example.com")
+    print(user.to_dict() if user else "User not found")
+
+    # Delete the user
+    delete_user("john.doe@example.com")
+
+    # Try to get the deleted user
+    user = get_user("john.doe@example.com")
+    print(user.to_dict() if user else "User not found")
