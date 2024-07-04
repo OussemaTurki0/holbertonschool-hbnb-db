@@ -1,4 +1,15 @@
-Flask
-Flask-SQLAlchemy
+flask
+flask-cors
+gunicorn
 SQLAlchemy
-bcrypt
+Flask-SQLAlchemy
+Flask-Bcrypt
+Flask-JWT-Extended
+
+#Flask: build web applications.
+#Flask-CORS: allowing web applications to make requests to different domains.
+#Gunicorn: WSGI HTTP Server for UNIX, used to serve Flask applications in production.
+#SQLAlchemy: simplifies database interactions.
+#Flask-SQLAlchemy: providing ORM support and database management tools.
+#Flask-Bcrypt:  secure user authentication.
+#Flask-JWT-Extended: Extends Flask-JWT with additional features for JSON Web Tokens (JWT) such as token refreshing and custom claims.
