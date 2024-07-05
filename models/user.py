@@ -3,7 +3,7 @@ from sqlalchemy.orm import relationship
 import bcrypt
 from models.base_model import BaseModel
 from datetime import datetime
-from . import SQL, bcrypt
+from models import SQL, bcrypt
 from flask_sqlalchemy import SQLAlchemy
 
 SQL = SQLAlchemy()
@@ -70,8 +70,8 @@ class User(BaseModel):
             password=user_data["password"],
             is_admin=user_data.get("is_admin", False)
         )
-        SQL.session.add(new_user)
-        SQL.session.commit()
+        db.session.add(new_user)
+        db.session.commit()
         return new_user
 
     @staticmethod
@@ -90,5 +90,5 @@ class User(BaseModel):
             user.set_password(data["password"])
         if "is_admin" in data:
             user.is_admin = data["is_admin"]
-        SQL.session.commit()
+        db.session.commit()
         return user

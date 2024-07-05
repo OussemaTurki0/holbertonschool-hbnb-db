@@ -1,6 +1,6 @@
 from sqlalchemy import Column, String, Integer, ForeignKey
 from sqlalchemy.orm import relationship
-from .base_model import BaseModel
+from models.base_model import BaseModel
 from flask_sqlalchemy import SQLAlchemy
 
 SQL = SQLAlchemy()

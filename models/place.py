@@ -1,7 +1,7 @@
 from sqlalchemy import Column, String, Integer, Float, ForeignKey, Text
 from sqlalchemy.orm import relationship
-from .base_model import BaseModel
-from . import SQL
+from models.base_model import BaseModel
+from models import SQL
 from flask_sqlalchemy import SQLAlchemy
 
 SQL = SQLAlchemy()
