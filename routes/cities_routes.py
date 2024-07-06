@@ -7,7 +7,7 @@ from requests.city_controllers import (
     create_city,
     delete_city,
     get_city_by_id,
-    get_cities,
+    get_all_cities,
     update_city,
 )
 
@@ -15,7 +15,7 @@ from requests.city_controllers import (
 city_routes = Blueprint("city_routes", __name__, url_prefix="/cities")
 
 # Route for getting all cities
-city_routes.route("/", methods=["GET"])(get_cities)
+city_routes.route("/", methods=["GET"])(get_all_cities)
 
 # Route for creating a new city
 city_routes.route("/", methods=["POST"])(create_city)

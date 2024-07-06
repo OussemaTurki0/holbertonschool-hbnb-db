@@ -9,7 +9,7 @@ from requests.review_controllers import (
     get_reviews_from_place,
     get_reviews_from_user,
     get_review_by_id,
-    get_reviews,
+    get_all_reviews,
     update_review,
 )
 
@@ -26,7 +26,7 @@ review_routes.route("/places/<place_id>/reviews")(get_reviews_from_place)
 review_routes.route("/users/<user_id>/reviews")(get_reviews_from_user)
 
 # Route for getting all reviews
-review_routes.route("/reviews", methods=["GET"])(get_reviews)
+review_routes.route("/reviews", methods=["GET"])(get_all_reviews)
 
 # Route for getting a review by ID
 review_routes.route("/reviews/<review_id>", methods=["GET"])(get_review_by_id)

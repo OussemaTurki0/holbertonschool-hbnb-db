@@ -4,7 +4,7 @@ This script defines the routes for the countries endpoints.
 
 from flask import Blueprint
 from requests.country_controllers import (
-    get_countries,
+    get_all_countries,
     get_country_by_code,
     get_country_cities,
 )
@@ -13,7 +13,7 @@ from requests.country_controllers import (
 country_routes = Blueprint("country_routes", __name__, url_prefix="/countries")
 
 # Route for getting all countries
-country_routes.route("/", methods=["GET"])(get_countries)
+country_routes.route("/", methods=["GET"])(get_all_countries)
 
 # Route for getting a country by its code
 country_routes.route("/<code>", methods=["GET"])(get_country_by_code)

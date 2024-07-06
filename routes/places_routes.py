@@ -7,7 +7,7 @@ from requests.place_controllers import (
     create_place,
     delete_place,
     get_place_by_id,
-    get_places,
+    get_all_places,
     update_place,
 )
 
@@ -15,7 +15,7 @@ from requests.place_controllers import (
 place_routes = Blueprint("place_routes", __name__, url_prefix="/places")
 
 # Route for getting all places
-place_routes.route("/", methods=["GET"])(get_places)
+place_routes.route("/", methods=["GET"])(get_all_places)
 
 # Route for creating a new place
 place_routes.route("/", methods=["POST"])(create_place)

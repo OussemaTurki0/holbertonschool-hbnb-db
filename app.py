@@ -2,29 +2,25 @@
 
 from flask import Flask
 from flask_jwt_extended import JWTManager
-from models import db, bcrypt
-from requests import user
+from routes import register_routes
+from flask_sqlalchemy import SQLAlchemy
+from . import create_app, db, jwt, bcryptgit
 
-app = Flask(__name__)
+# Initialize the Flask application using create_app() from __init__.py
+app = create_app()
 
-# Configuration de l'application
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///***********.*****'
+# App configuration
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///my_database.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['JWT_SECRET_KEY'] = 'Holberton123456'
 
-# Initialisation des extensions
-SQL.init_app(app)
-bcrypt.init_app(app)
-jwt = JWTManager(app)
+db = SQLAlchemy(app)
 
-# Routes de votre application
-app.add_url_rule('/users', 'get_users', user.get_users, methods=['GET'])
-app.add_url_rule('/users', 'create_user', user.create_user, methods=['POST'])
-app.add_url_rule('/users/<user_id>', 'get_user_by_id', user.get_user_by_id, methods=['GET'])
-app.add_url_rule('/users/<user_id>', 'update_user', user.update_user, methods=['PUT'])
-app.add_url_rule('/users/<user_id>', 'delete_user', user.delete_user, methods=['DELETE'])
+# Register all routes using the register_routes function
+register_routes(app)
 
-app = create_app()
+# Create tables based on models
+db.create_all()
 
 if __name__ == "__main__":
     app.run(debug=False)

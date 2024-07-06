@@ -2,12 +2,12 @@ from flask import abort, request
 from models.place import Place
 # handle HTTP requests and responses.
 
-def fetch_all_places():
+def get_all_places():
     places: list[Place] = Place.get_all()
     return [place.to_dict() for place in places], 200
 
 
-def create_new_place():
+def create_place():
     data = request.get_json()
     try:
         new_place = Place.create(data)
@@ -18,14 +18,14 @@ def create_new_place():
     return new_place.to_dict(), 201
 
 
-def fetch_place_by_id(place_id: str):
+def get_place_by_id(place_id: str):
     place: Place | None = Place.get(place_id)
     if not place:
         abort(404, f"Place with ID {place_id} not found")
     return place.to_dict(), 200
 
 
-def modify_place(place_id: str):
+def update_place(place_id: str):
     data = request.get_json()
     try:
         modified_place: Place | None = Place.update(place_id, data)
@@ -36,7 +36,7 @@ def modify_place(place_id: str):
     return modified_place.to_dict(), 200
 
 
-def remove_place(place_id: str):
+def delete_place(place_id: str):
     if not Place.delete(place_id):
         abort(404, f"Place with ID {place_id} not found")
     return "", 204

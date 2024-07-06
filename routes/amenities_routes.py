@@ -7,7 +7,7 @@ from requests.amenity_controllers import (
     create_amenity,
     delete_amenity,
     get_amenity_by_id,
-    get_amenities,
+    get_all_amenities,
     update_amenity,
 )
 
