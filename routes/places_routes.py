@@ -1,3 +1,4 @@
+
 """
 This script sets up the routes for the places functionality.
 """

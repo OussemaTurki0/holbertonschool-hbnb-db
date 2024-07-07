@@ -1,10 +1,10 @@
 from flask import Blueprint
-from .users import user_routes
-from .places import place_routes
-from .reviews import review_routes
-from .countries import countries_routes
-from .cities import cities_routes
-from .amenities import amenities_routes
+from routes.users import user_routes
+from routes.places import place_routes
+from routes.reviews import review_routes
+from routes.countries import countries_routes
+from routes.cities import cities_routes
+from routes.amenities import amenities_routes
 
 # Register all blueprints
 def register_routes(app):

@@ -4,7 +4,7 @@ from flask import Flask
 from flask_jwt_extended import JWTManager
 from routes import register_routes
 from flask_sqlalchemy import SQLAlchemy
-from . import create_app, db, jwt, bcryptgit
+from requests.__init__ import create_app, db, jwt, bcryptgit
 
 # Initialize the Flask application using create_app() from __init__.py
 app = create_app()
@@ -23,4 +23,4 @@ register_routes(app)
 db.create_all()
 
 if __name__ == "__main__":
-    app.run(debug=False)
+    app.run(debug=True)

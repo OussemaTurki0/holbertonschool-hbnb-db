@@ -9,10 +9,13 @@ from models.city import City
 from models.amenity import Amenity
 
 # Configure database connection
-DATABASE_URL = "sqlite:///test_database.db"
-engine = create_engine(DATABASE_URL, echo=True)
-Session = sessionmaker(bind=engine)
-session = Session()
+class DataManager:
+    def __init__(self):
+        self.use_database = os.getenv('USE_DATABASE', 'True').lower() == 'true'
+        DATABASE_URL = "sqlite:///test_database.db"
+        self.engine = create_engine(DATABASE_URL, echo=True)
+        Session = sessionmaker(bind=self.engine)
+        self.session = Session()
 
 # Create tables
 def create_tables():
