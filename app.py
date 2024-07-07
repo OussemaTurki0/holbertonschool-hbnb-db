@@ -2,17 +2,14 @@
 
 from flask import Flask
 from flask_jwt_extended import JWTManager
-from routes import register_routes
+from requests.__init__ import register_routes
 from flask_sqlalchemy import SQLAlchemy
-from requests.__init__ import create_app, db, jwt, bcryptgit
+from requests.__init__ import create_app, db, jwt
+from config import Config, DevelopmentConfig
 
 # Initialize the Flask application using create_app() from __init__.py
 app = create_app()
-
-# App configuration
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///my_database.db'
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-app.config['JWT_SECRET_KEY'] = 'Holberton123456'
+app.config.from_object(DevelopmentConfig)
 
 db = SQLAlchemy(app)
 
@@ -20,7 +17,8 @@ db = SQLAlchemy(app)
 register_routes(app)
 
 # Create tables based on models
-db.create_all()
+from persistence.datamanager import DataManager
+DataManager().create_tables()
 
 if __name__ == "__main__":
     app.run(debug=True)

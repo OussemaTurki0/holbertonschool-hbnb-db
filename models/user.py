@@ -1,12 +1,18 @@
+import sys
+import os
+
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+
 from sqlalchemy import Column, String, Integer, Boolean
 from sqlalchemy.orm import relationship
-import bcrypt
 from models.base_model import BaseModel
 from datetime import datetime
-from models import SQL, bcrypt
+from flask_bcrypt import Bcrypt
 from flask_sqlalchemy import SQLAlchemy
+from app import db, app
 
-SQL = SQLAlchemy()
+bcrypt = Bcrypt(app)
+
 
 class User(BaseModel):
     __tablename__ = 'users'
@@ -17,8 +23,8 @@ class User(BaseModel):
     last_name = Column(String(50), nullable=False)
     password_hash = Column(String(128), nullable=False)
     is_admin = Column(Boolean, default=False)
-    created_at = Column(SQL.DateTime, default=SQL.func.current_timestamp())
-    updated_at = Column(SQL.DateTime, onupdate=SQL.func.current_timestamp())
+    created_at = Column(DateTime, default=SQL.func.current_timestamp())
+    updated_at = Column(DateTime, onupdate=SQL.func.current_timestamp())
     places = relationship("Place", back_populates="host")
     reviews = relationship("Review", back_populates="user")
     #Primary=key(ensures that each id value is unique and cannot be duplicated within the table.)

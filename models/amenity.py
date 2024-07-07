@@ -4,16 +4,16 @@ from sqlalchemy import Column, String, Integer, ForeignKey
 from sqlalchemy.orm import relationship
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
+from app import db
 
-SQL = SQLAlchemy()
 
 class Amenity(BaseModel):
     """Amenity representation"""
     __tablename__ = 'amenities'
-    id = SQL.Column(SQL.String(36), primary_key=True)
-    name = SQL.Column(SQL.String(80), nullable=False, unique=True)
-    created_at = SQL.Column(SQL.DateTime, default=SQL.func.current_timestamp())
-    updated_at = SQL.Column(SQL.DateTime, onupdate=SQL.func.current_timestamp())
+    id = Column(String(36), primary_key=True)
+    name = Column(String(80), nullable=False, unique=True)
+    created_at = Column(DateTime, default=db.func.current_timestamp())
+    updated_at = Column(DateTime, onupdate=db.func.current_timestamp())
 
     def __init__(self, name: str):
         self.name = name
@@ -36,8 +36,8 @@ class Amenity(BaseModel):
         if existing_amenity:
             raise ValueError("Amenity already exists")
         new_amenity = Amenity(name=data["name"])
-        SQL.session.add(new_amenity)
-        SQL.session.commit()
+        db.session.add(new_amenity)
+        db.session.commit()
         return new_amenity
 
     @staticmethod
@@ -48,5 +48,5 @@ class Amenity(BaseModel):
             return None
         if "name" in data:
             amenity.name = data["name"]
-        SQL.session.commit()
+        db.session.commit()
         return amenity

@@ -2,8 +2,8 @@ from sqlalchemy import Column, String, Integer, ForeignKey
 from sqlalchemy.orm import relationship
 from models.base_model import BaseModel
 from flask_sqlalchemy import SQLAlchemy
+from app import db
 
-SQL = SQLAlchemy()
 
 class Country(BaseModel):
     __tablename__ = 'countries'
@@ -47,6 +47,6 @@ class Country(BaseModel):
     def create(name, code):
         """Create a new country"""
         new_country = Country(name=name, code=code)
-        SQL.session.add(new_country)
-        SQL.session.commit()
+        db.session.add(new_country)
+        db.session.commit()
         return new_country

@@ -3,8 +3,8 @@ from models.base_model import BaseModel
 from sqlalchemy import Column, String, Integer, ForeignKey
 from sqlalchemy.orm import relationship
 from flask_sqlalchemy import SQLAlchemy
+from app import db
 
-SQL = SQLAlchemy()
 
 class City(BaseModel):
     __tablename__ = 'cities'
@@ -41,8 +41,8 @@ class City(BaseModel):
         if not country:
             raise ValueError("Country not found")
         new_city = City(name=data["name"], country_id=data["country_id"])
-        SQL.session.add(new_city)
-        SQL.session.commit()
+        db.session.add(new_city)
+        db.session.commit()
 
         return new_city
 
@@ -56,5 +56,5 @@ class City(BaseModel):
             city.name = data["name"]
         if "country_id" in data:
             city.country_id = data["country_id"]
-        SQL.session.commit()
+        db.session.commit()
         return city

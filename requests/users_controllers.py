@@ -29,7 +29,7 @@ def user_login():
     return jsonify(access_token=access_token), 200
 
 def get_all_users():
-    users: list[User] = User.query.all()
+    users = User.query.all()
     return [user.to_dict() for user in users]
 
 @jwt_required()
@@ -51,7 +51,6 @@ def create_user():
 
 def get_user_by_id(user_id: str):
     user = User.query.get(user_id)
-    user: User | None = User.get(user_id)
     if not user:
         abort(404, f"User with ID {user_id} not found")
     return user.to_dict(), 200
@@ -78,8 +77,8 @@ def delete_user(user_id: str):
     if not claims.get('is_admin'):
         return jsonify({"msg": "Administration rights required"}), 403
     user = User.query.get(user_id)
-    if not User.delete(user_id):
+    if not user:
         abort(404, f"User with ID {user_id} not found")
-    SQL.session.delete(user)
-    SQL.session.commit()
+    db.session.delete(user)
+    db.session.commit()
     return "", 204

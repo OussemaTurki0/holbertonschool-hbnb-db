@@ -1,21 +1,25 @@
 from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy import Column, String, Integer, Boolean
+from sqlalchemy.orm import relationship
+from models.base_model import BaseModel
+from datetime import datetime
+from app import db
 
-SQL = SQLAlchemy()
 
-class Review(SQL.Model):
+class Review(BaseModel):
     """Review representation"""
 
     __tablename__ = 'reviews'
 
-    id = SQL.Column(SQL.String(36), primary_key=True)
-    place_id = SQL.Column(SQL.String(36), SQL.ForeignKey('places.id'), nullable=False)
-    user_id = SQL.Column(SQL.String(36), SQL.ForeignKey('users.id'), nullable=False)
-    comment = SQL.Column(SQL.Text, nullable=False)
-    rating = SQL.Column(SQL.Float, nullable=False)
-    created_at = SQL.Column(SQL.DateTime, default=SQL.func.current_timestamp())
-    updated_at = SQL.Column(SQL.DateTime, onupdate=SQL.func.current_timestamp())
-    place = SQL.relationship('Place', back_populates='reviews')
-    user = SQL.relationship('User', back_populates='reviews')
+    id = Column(String(36), primary_key=True)
+    place_id = Column(String(36), ForeignKey('places.id'), nullable=False)
+    user_id = Column(String(36), ForeignKey('users.id'), nullable=False)
+    comment = Column(Text, nullable=False)
+    rating = Column(Float, nullable=False)
+    created_at = Column(DateTime, default=db.func.current_timestamp())
+    updated_at = Column(DateTime, onupdate=db.func.current_timestamp())
+    place = relationship('Place', back_populates='reviews')
+    user = relationship('User', back_populates='reviews')
 
     def __init__(self, place_id: str, user_id: str, comment: str, rating: float):
         self.place_id = place_id
@@ -56,8 +60,8 @@ class Review(SQL.Model):
             comment=data["comment"],
             rating=float(data["rating"])
         )
-        SQL.session.add(new_review)
-        SQL.session.commit()
+        db.session.add(new_review)
+        db.session.commit()
         return new_review
 
     @staticmethod
@@ -68,5 +72,5 @@ class Review(SQL.Model):
             raise ValueError("Review not found")
         for key, value in data.items():
             setattr(review, key, value)
-        SQL.session.commit()
+        db.session.commit()
         return review

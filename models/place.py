@@ -1,10 +1,15 @@
+import sys
+import os
+print("Current sys.path:", sys.path)
+
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+
 from sqlalchemy import Column, String, Integer, Float, ForeignKey, Text
 from sqlalchemy.orm import relationship
 from models.base_model import BaseModel
-from models import SQL
 from flask_sqlalchemy import SQLAlchemy
+from app import db
 
-SQL = SQLAlchemy()
 
 class Place(BaseModel):
     __tablename__ = 'places'
@@ -93,8 +98,8 @@ class Place(BaseModel):
             max_guests=int(data["max_guests"])
         )
 
-        SQL.session.add(new_place)
-        SQL.session.commit()
+        db.session.add(new_place)
+        db.session.commit()
 
         return new_place
 
@@ -106,5 +111,5 @@ class Place(BaseModel):
             return None
         for key, value in data.items():
             setattr(place, key, value)
-        SQL.session.commit()
+        db.session.commit()
         return place
