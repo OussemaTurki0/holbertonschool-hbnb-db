@@ -2,7 +2,7 @@
 
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
-from api import create_app, register_routes, db  # Import db from requests
+from api import create_app, register_routes
 from config import Config, DevelopmentConfig
 
 app = create_app(config_class=DevelopmentConfig)  # Use DevelopmentConfig or another appropriate config

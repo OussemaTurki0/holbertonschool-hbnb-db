@@ -4,7 +4,7 @@ print("Current sys.path:", sys.path)
 
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
-from sqlalchemy import Column, String, Integer, Float, ForeignKey, Text
+from sqlalchemy import Column, String, Integer, Float, ForeignKey, Text, DateTime
 from sqlalchemy.orm import relationship
 from models.base_model import BaseModel
 from flask_sqlalchemy import SQLAlchemy
