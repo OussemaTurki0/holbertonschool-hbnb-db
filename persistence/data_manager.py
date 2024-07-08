@@ -6,6 +6,7 @@ from models.place import Place
 from models.country import Country
 from models.city import City
 from models.amenity import Amenity
+from persistence.ipersistence_manager import IPersistenceManager
 
 # Configure database connection
 class DataManager(IPersistenceManager):
@@ -13,7 +14,7 @@ class DataManager(IPersistenceManager):
         self.use_database = os.getenv('USE_DATABASE', 'True').lower() == 'true'
         DATABASE_URL = "sqlite:///test_database.db"
         self.engine = create_engine(DATABASE_URL, echo=True)
-        Self.Session = sessionmaker(bind=s/elf.engine)
+        self.Session = sessionmaker(bind=self.engine)
         self.session = self.Session()
 
     # Create tables
