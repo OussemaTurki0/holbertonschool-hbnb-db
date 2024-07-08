@@ -1,3 +1,4 @@
+import os
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from models.user import User
@@ -6,6 +7,7 @@ from models.place import Place
 from models.country import Country
 from models.city import City
 from models.amenity import Amenity
+from models.base_model import Base
 from persistence.ipersistence_manager import IPersistenceManager
 
 # Configure database connection
