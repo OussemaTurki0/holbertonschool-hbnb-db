@@ -9,7 +9,7 @@ from models.base_model import BaseModel
 from datetime import datetime
 from flask_bcrypt import Bcrypt
 from flask_sqlalchemy import SQLAlchemy
-from app import db, app
+from requests.__init__ import db, app
 
 bcrypt = Bcrypt(app)
 

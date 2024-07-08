@@ -8,12 +8,12 @@ from models.city import City
 from models.amenity import Amenity
 
 # Configure database connection
-class DataManager:
+class DataManager(IPersistenceManager):
     def __init__(self):
         self.use_database = os.getenv('USE_DATABASE', 'True').lower() == 'true'
         DATABASE_URL = "sqlite:///test_database.db"
         self.engine = create_engine(DATABASE_URL, echo=True)
-        Self.Session = sessionmaker(bind=self.engine)
+        Self.Session = sessionmaker(bind=s/elf.engine)
         self.session = self.Session()
 
     # Create tables
