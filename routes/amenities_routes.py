@@ -1,11 +1,5 @@
 import sys
 import os
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
-
-"""
-This script defines the routes for the amenities functionality.
-"""
-
 from flask import Blueprint
 from api.amenity_controllers import (
     create_amenity,
@@ -14,9 +8,18 @@ from api.amenity_controllers import (
     get_all_amenities,
     update_amenity,
 )
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+
+"""
+This script defines the routes for the amenities functionality.
+"""
+
 
 # Create a Blueprint for amenity routes
-amenities_routes = Blueprint("amenity_routes", __name__, url_prefix="/amenities")
+amenities_routes = Blueprint(
+    "amenity_routes",
+    __name__,
+    url_prefix="/amenities")
 
 # Route for getting all amenities
 amenities_routes.route("/", methods=["GET"])(get_all_amenities)
