@@ -1,10 +1,8 @@
-flask
-flask-cors
-gunicorn
-SQLAlchemy
-Flask-SQLAlchemy
-Flask-Bcrypt
-Flask-JWT-Extended
+flask==3.0.3
+SQLAlchemy==2.0.31
+Flask-SQLAlchemy==3.1.1
+Flask-Bcrypt==1.0.1
+Flask-JWT-Extended==4.6.0
 
 #Flask: build web applications.
 #Flask-CORS: allowing web applications to make requests to different domains.
