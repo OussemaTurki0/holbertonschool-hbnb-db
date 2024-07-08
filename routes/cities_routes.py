@@ -7,7 +7,7 @@ This script defines the routes for the cities functionality.
 """
 
 from flask import Blueprint
-from requests.city_controllers import (
+from api.city_controllers import (
     create_city,
     delete_city,
     get_city_by_id,
@@ -16,19 +16,19 @@ from requests.city_controllers import (
 )
 
 # Create a Blueprint for city routes
-city_routes = Blueprint("city_routes", __name__, url_prefix="/cities")
+cities_routes = Blueprint("city_routes", __name__, url_prefix="/cities")
 
 # Route for getting all cities
-city_routes.route("/", methods=["GET"])(get_all_cities)
+cities_routes.route("/", methods=["GET"])(get_all_cities)
 
 # Route for creating a new city
-city_routes.route("/", methods=["POST"])(create_city)
+cities_routes.route("/", methods=["POST"])(create_city)
 
 # Route for getting a city by ID
-city_routes.route("/<city_id>", methods=["GET"])(get_city_by_id)
+cities_routes.route("/<city_id>", methods=["GET"])(get_city_by_id)
 
 # Route for updating a city by ID
-city_routes.route("/<city_id>", methods=["PUT"])(update_city)
+cities_routes.route("/<city_id>", methods=["PUT"])(update_city)
 
 # Route for deleting a city by ID
 city_routes.route("/<city_id>", methods=["DELETE"])(delete_city)
