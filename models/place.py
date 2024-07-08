@@ -1,6 +1,5 @@
 import sys
 import os
-print("Current sys.path:", sys.path)
 
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 

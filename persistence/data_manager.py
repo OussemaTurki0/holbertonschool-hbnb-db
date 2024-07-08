@@ -2,11 +2,6 @@ import os
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from models.user import User
-from models.review import Review
-from models.place import Place
-from models.country import Country
-from models.city import City
-from models.amenity import Amenity
 from models.base_model import Base
 from persistence.ipersistence_manager import IPersistenceManager
 
@@ -24,44 +19,31 @@ class DataManager(IPersistenceManager):
         Base.metadata.create_all(self.engine)
         print("Tables created")
 
-    # Function to add a user
-    def add_user(self, first_name, last_name, email, password, is_admin=False):
-        new_user = User(first_name=first_name, last_name=last_name, email=email, password=password, is_admin=is_admin)
-        self.session.add(new_user)
+    # Concrete implementation of abstract methods
+
+    def save(self, entity):
+        self.session.add(entity)
         self.session.commit()
-        print("User added successfully")
 
-    # Function to read a user
-    def get_user(self, email):
-        user = self.session.query(User).filter_by(email=email).first()
-        return user
+    def get(self, entity_id):
+        return self.session.query(User).get(entity_id)
 
-    # Function to update a user
-    def update_user(self, email, first_name=None, last_name=None, password=None, is_admin=None):
-        user = self.session.query(User).filter_by(email=email).first()
-        if user:
-            if first_name:
-                user.first_name = first_name
-            if last_name:
-                user.last_name = last_name
-            if password:
-                user.password = password
-            if is_admin is not None:
-                user.is_admin = is_admin
+    def update(self, entity_id, data):
+        entity = self.session.query(User).get(entity_id)
+        if entity:
+            for key, value in data.items():
+                setattr(entity, key, value)
             self.session.commit()
-            print("User updated successfully")
-        else:
-            print("User not found")
+        return entity
 
-    # Function to delete a user
-    def delete_user(self, email):
-        user = self.session.query(User).filter_by(email=email).first()
-        if user:
-            self.session.delete(user)
+    def delete(self, entity_id):
+        entity = self.session.query(User).get(entity_id)
+        if entity:
+            self.session.delete(entity)
             self.session.commit()
-            print("User deleted successfully")
-        else:
-            print("User not found")
+
+    def get_all(self):
+        return self.session.query(User).all()
 
     def close_session(self):
         self.session.close()

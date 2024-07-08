@@ -4,7 +4,6 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
 from flask import abort, request
 from models.amenity import Amenity
-# handle HTTP requests and responses.
 
 def get_all_amenities():
     try:
@@ -50,8 +49,11 @@ def update_amenity(amenity_id: str):
         abort(500, f"Failed to update amenity: {str(e)}")
 
 
+
 def delete_amenity(amenity_id: str):
-    if not Amenity.delete(amenity_id):
-        abort(404, f"Amenity with ID {amenity_id} not found")
-    return "", 204
+    try:
+        if not Amenity.delete(amenity_id):
+            abort(404, f"Amenity with ID {amenity_id} not found")
+        return "", 204
     except Exception as e:
+        abort(500, f"Failed to delete amenity: {str(e)}")

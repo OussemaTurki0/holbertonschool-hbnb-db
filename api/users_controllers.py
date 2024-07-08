@@ -5,8 +5,8 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 from flask import abort, request, jsonify
 from flask_jwt_extended import jwt_required, get_jwt
 from flask_jwt_extended import create_access_token
-from models.user import User
 from api import db
+from models.user import User
 # handle HTTP requests and responses.
 
 def user_login():
