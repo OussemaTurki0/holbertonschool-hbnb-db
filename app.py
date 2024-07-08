@@ -14,7 +14,7 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 register_routes(app)
 
 # Create tables based on models
-from persistence.datamanager import DataManager
+from persistence.data_manager import DataManager
 DataManager().create_tables()
 
 if __name__ == "__main__":

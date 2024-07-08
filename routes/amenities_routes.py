@@ -19,7 +19,7 @@ from api.amenity_controllers import (
 amenities_routes = Blueprint("amenity_routes", __name__, url_prefix="/amenities")
 
 # Route for getting all amenities
-amenities_routes.route("/", methods=["GET"])(get_amenities)
+amenities_routes.route("/", methods=["GET"])(get_all_amenities)
 
 # Route for creating a new amenity
 amenities_routes.route("/", methods=["POST"])(create_amenity)
@@ -31,4 +31,4 @@ amenities_routes.route("/<amenity_id>", methods=["GET"])(get_amenity_by_id)
 amenities_routes.route("/<amenity_id>", methods=["PUT"])(update_amenity)
 
 # Route for deleting an amenity by ID
-amenity_routes.route("/<amenity_id>", methods=["DELETE"])(delete_amenity)
+amenities_routes.route("/<amenity_id>", methods=["DELETE"])(delete_amenity)

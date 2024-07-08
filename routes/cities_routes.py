@@ -31,4 +31,4 @@ cities_routes.route("/<city_id>", methods=["GET"])(get_city_by_id)
 cities_routes.route("/<city_id>", methods=["PUT"])(update_city)
 
 # Route for deleting a city by ID
-city_routes.route("/<city_id>", methods=["DELETE"])(delete_city)
+cities_routes.route("/<city_id>", methods=["DELETE"])(delete_city)
