@@ -1,17 +1,14 @@
 """ run the app"""
 
 from flask import Flask
-from flask_jwt_extended import JWTManager
-from requests.__init__ import register_routes
 from flask_sqlalchemy import SQLAlchemy
-from requests.__init__ import create_app, db, jwt
+from api import create_app, register_routes, db  # Import db from requests
 from config import Config, DevelopmentConfig
 
-# Initialize the Flask application using create_app() from __init__.py
-app = create_app()
-app.config.from_object(DevelopmentConfig)
+app = create_app(config_class=DevelopmentConfig)  # Use DevelopmentConfig or another appropriate config
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///my_database.db'  # Set the database URI
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
-db = SQLAlchemy(app)
 
 # Register all routes using the register_routes function
 register_routes(app)
