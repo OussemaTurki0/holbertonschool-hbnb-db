@@ -2,7 +2,6 @@ from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import Column, String, Integer, Boolean, DateTime
 from sqlalchemy.orm import relationship
 from models.base_model import BaseModel
-from datetime import datetime
 from app import db
 
 

@@ -1,9 +1,8 @@
 #!/usr/bin/python3
 from models.base_model import BaseModel
-from sqlalchemy import Column, String, Integer, ForeignKey
+from sqlalchemy import Column, String, Integer, ForeignKey, DateTime
 from sqlalchemy.orm import relationship
 from flask_sqlalchemy import SQLAlchemy
-from datetime import datetime
 from app import db
 
 
