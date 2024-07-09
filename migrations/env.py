@@ -1,58 +1,87 @@
-# alembic/env.py
+
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
 from alembic import context
 import os
 import sys
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
-from sqlalchemy import engine_from_config
-from sqlalchemy import pool
-from api import create_app  # Adjust this import based on your project structure
-from config import DevelopmentConfig  # Adjust this import based on your project structure
-from models.base_model import Base  # Adjust this import based on your project structure
+from logging.config import fileConfig
+from sqlalchemy import engine_from_config, pool
+from models import city, base_model  # Import all models here
 
+# Import app and config
+from api import create_app
+from config import DevelopmentConfig
 
+# Initialize your app with the development configuration
 app = create_app(config_class=DevelopmentConfig)
-db = app.extensions['sqlalchemy'].db  # Adjust based on how you initialize SQLAlchemy in your app
 
-# Load target metadata from your SQLAlchemy models
-target_metadata = Base.metadata
+# Get the SQLAlchemy extension from the app
+db = app.extensions['sqlalchemy'].db
 
-# Alembic configuration
+# This is the Alembic Config object, which provides access to the values
+# within the .ini file in use.
 config = context.config
-config.set_main_option('sqlalchemy.url', app.config['SQLALCHEMY_DATABASE_URI'])
 
-# Other Alembic configurations as needed
+# Interpret the config file for Python logging.
+# This line sets up loggers basically.
+if config.config_file_name is not None:
+    fileConfig(config.config_file_name)
 
-def run_migrations_online():
-    engine = engine_from_config(
-        config.get_section(config.config_ini_section),
-        prefix='sqlalchemy.',
-        poolclass=pool.NullPool
-    )
-    connection = engine.connect()
+# Add your model's MetaData object here
+# for 'autogenerate' support
+# from myapp import mymodel
+# target_metadata = mymodel.Base.metadata
+target_metadata = base_model.Base.metadata  # Adjust this to include all models
+
+# other values from the config, defined by the needs of env.py,
+# can be acquired:
+# my_important_option = config.get_main_option("my_important_option")
+# ... etc.
+
+def run_migrations_offline() -> None:
+    """Run migrations in 'offline' mode.
+
+    This configures the context with just a URL
+    and not an Engine, though an Engine is acceptable
+    here as well. By skipping the Engine creation
+    we don't even need a DBAPI to be available.
+
+    Calls to context.execute() here emit the given string to the
+    script output.
+    """
+    url = config.get_main_option("sqlalchemy.url")
     context.configure(
-        connection=connection,
-        target_metadata=target_metadata,
-        process_revision_directives=True,
-    )
-    try:
-        with context.begin_transaction():
-            context.run_migrations()
-    finally:
-        connection.close()
-
-# Check if Alembic is running in offline mode
-if context.is_offline_mode():
-    # Handle offline migrations
-    # Example:
-    context.configure(
-        url=config.get_main_option("sqlalchemy.url"),
+        url=url,
         target_metadata=target_metadata,
         literal_binds=True,
         dialect_opts={"paramstyle": "named"},
     )
+
     with context.begin_transaction():
         context.run_migrations()
+
+def run_migrations_online() -> None:
+    """Run migrations in 'online' mode.
+
+    In this scenario we need to create an Engine
+    and associate a connection with the context.
+    """
+    connectable = engine_from_config(
+        config.get_section(config.config_ini_section),
+        prefix="sqlalchemy.",
+        poolclass=pool.NullPool,
+    )
+
+    with connectable.connect() as connection:
+        context.configure(
+            connection=connection,
+            target_metadata=target_metadata
+        )
+
+        with context.begin_transaction():
+            context.run_migrations()
+
+if context.is_offline_mode():
+    run_migrations_offline()
 else:
-    # Run migrations online
     run_migrations_online()
