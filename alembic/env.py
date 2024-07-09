@@ -9,7 +9,6 @@ from models import city, base_model, user, review, place, country, amenity
 from api import create_app
 from config import DevelopmentConfig
 
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 app = create_app(config_class=DevelopmentConfig)
 db = app.extensions['sqlalchemy'].db
 config = context.config
@@ -20,14 +19,7 @@ if config.config_file_name is not None:
 target_metadata = base_model.Base.metadata
 
 def run_migrations_offline() -> None:
-    """Run migrations in 'offline' mode.
-    This configures the context with just a URL
-    and not an Engine, though an Engine is acceptable
-    here as well. By skipping the Engine creation
-    we don't even need a DBAPI to be available.
-    Calls to context.execute() here emit the given string to the
-    script output.
-    """
+    """Run migrations in 'offline' mode."""
     url = config.get_main_option("sqlalchemy.url")
     context.configure(
         url=url,
@@ -40,7 +32,7 @@ def run_migrations_offline() -> None:
         context.run_migrations()
 
 def run_migrations_online() -> None:
-#create an Engine and associate a connection with the context.
+    """Run migrations in 'online' mode."""
     connectable = engine_from_config(
         config.get_section(config.config_ini_section),
         prefix="sqlalchemy.",
